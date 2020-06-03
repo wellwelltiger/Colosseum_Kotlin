@@ -21,6 +21,7 @@ import okhttp3.Response;
 public class ServerUtil {
 
     private static final String BASE_URL = "http://15.165.177.142";
+//    private static final String BASE_URL = "http://10.0.2.2:5000";
 
 
     public interface JsonResponseHandler {

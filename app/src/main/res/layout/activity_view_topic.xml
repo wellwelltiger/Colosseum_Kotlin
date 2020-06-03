@@ -62,7 +62,7 @@
                             android:id="@+id/firstSideVoteCountTxt"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="10표"
+                            android:text="0표"
                             android:textColor="@color/white" />
 
                         <Button
@@ -99,7 +99,7 @@
                             android:id="@+id/secondSideVoteCountTxt"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="24표"
+                            android:text="0표"
                             android:textColor="@color/white" />
 
                         <Button
