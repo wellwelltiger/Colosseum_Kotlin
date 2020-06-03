@@ -7,14 +7,20 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import kr.co.tjoeun.colosseum_kotlin.databinding.ActivityViewTopicBinding;
+import kr.co.tjoeun.colosseum_kotlin.datas.Topic;
 import kr.co.tjoeun.colosseum_kotlin.utils.ServerUtil;
 
 public class ViewTopicActivity extends BaseActivity {
 
     ActivityViewTopicBinding binding;
+
+    Topic mTopic;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +41,6 @@ public class ViewTopicActivity extends BaseActivity {
         int topicId = getIntent().getIntExtra("topic_id", -1);
 
         if (topicId == -1) {
-//            TODO - 주제가 제대로 못넘어왔다
             Toast.makeText(mContext, "잘못된 접근입니다.", Toast.LENGTH_SHORT).show();
             finish();
         }
@@ -44,8 +49,32 @@ public class ViewTopicActivity extends BaseActivity {
             @Override
             public void onResponse(JSONObject json) {
                 Log.d("토픽 상세정보", json.toString());
+
+                try {
+                    JSONObject data = json.getJSONObject("data");
+                    JSONObject topic = data.getJSONObject("topic");
+
+                    mTopic = Topic.getTopicFromJson(topic);
+
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            setTopicValuesToUi();
+                        }
+                    });
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
             }
         });
 
     }
+
+    void setTopicValuesToUi() {
+        binding.topicTitleTxt.setText(mTopic.getTitle());
+        Glide.with(mContext).load(mTopic.getImageUrl()).into(binding.topicImg);
+    }
+
 }
