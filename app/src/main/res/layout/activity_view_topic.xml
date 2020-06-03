@@ -65,6 +65,13 @@
                             android:text="10표"
                             android:textColor="@color/white" />
 
+                        <Button
+                            android:id="@+id/voteToFirstSideBtn"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:text="투표 하기" />
+
                     </LinearLayout>
 
                     <TextView
@@ -94,6 +101,14 @@
                             android:layout_height="wrap_content"
                             android:text="24표"
                             android:textColor="@color/white" />
+
+                        <Button
+                            android:id="@+id/voteToSecondSideBtn"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:text="투표 하기" />
+
 
                     </LinearLayout>
 
