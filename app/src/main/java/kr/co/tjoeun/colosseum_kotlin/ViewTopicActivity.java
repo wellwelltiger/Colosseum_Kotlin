@@ -3,6 +3,7 @@ package kr.co.tjoeun.colosseum_kotlin;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -37,6 +38,15 @@ public class ViewTopicActivity extends BaseActivity {
 
     @Override
     public void setupEvents() {
+
+        binding.replyBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent myIntent = new Intent(mContext, EditReplyActivity.class);
+                myIntent.putExtra("topicTitle", mTopic.getTitle());
+                startActivity(myIntent);
+            }
+        });
 
         binding.voteToFirstSideBtn.setOnClickListener(new View.OnClickListener() {
             @Override

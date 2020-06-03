@@ -1,15 +1,22 @@
 package kr.co.tjoeun.colosseum_kotlin;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
 
 import android.os.Bundle;
 
+import kr.co.tjoeun.colosseum_kotlin.databinding.ActivityEditReplyBinding;
+
 public class EditReplyActivity extends BaseActivity {
+
+    String topicTitle;
+
+    ActivityEditReplyBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_edit_reply);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_edit_reply);
         setupEvents();
         setValues();
     }
@@ -21,6 +28,8 @@ public class EditReplyActivity extends BaseActivity {
 
     @Override
     public void setValues() {
+        topicTitle = getIntent().getStringExtra("topicTitle");
 
+        binding.topicTitleTxt.setText(topicTitle);
     }
 }
