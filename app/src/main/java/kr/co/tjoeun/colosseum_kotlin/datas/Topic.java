@@ -14,6 +14,7 @@ public class Topic implements Serializable {
     private String title;
     private String imageUrl;
     private List<TopicSide> sideList = new ArrayList<>();
+    private List<TopicReply> replyList = new ArrayList<>();
 
     public static Topic getTopicFromJson(JSONObject jsonObject) {
         Topic topic = new Topic();
@@ -29,6 +30,11 @@ public class Topic implements Serializable {
                 JSONObject side = sides.getJSONObject(i);
                 TopicSide topicSide = TopicSide.getTopicSideFromJson(side);
                 topic.sideList.add(topicSide);
+            }
+
+//            따라오는 의견 목록을 추가 파싱
+            if (!jsonObject.isNull("replies")) {
+
             }
 
         } catch (JSONException e) {
@@ -73,5 +79,9 @@ public class Topic implements Serializable {
 
     public List<TopicSide> getSideList() {
         return sideList;
+    }
+
+    public List<TopicReply> getReplyList() {
+        return replyList;
     }
 }
