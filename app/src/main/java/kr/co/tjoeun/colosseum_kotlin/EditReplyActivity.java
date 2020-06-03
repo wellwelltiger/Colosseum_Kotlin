@@ -4,13 +4,19 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+
+import org.json.JSONObject;
 
 import kr.co.tjoeun.colosseum_kotlin.databinding.ActivityEditReplyBinding;
+import kr.co.tjoeun.colosseum_kotlin.utils.ServerUtil;
 
 public class EditReplyActivity extends BaseActivity {
 
     String topicTitle;
     String mySideTitle;
+    int topicId;
 
     ActivityEditReplyBinding binding;
 
@@ -25,6 +31,21 @@ public class EditReplyActivity extends BaseActivity {
     @Override
     public void setupEvents() {
 
+        binding.postBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                String input = binding.contentEdt.getText().toString();
+                ServerUtil.postRequestReply(mContext, topicId, input, new ServerUtil.JsonResponseHandler() {
+                    @Override
+                    public void onResponse(JSONObject json) {
+                        Log.d("댓글달기응답", json.toString());
+                    }
+                });
+
+            }
+        });
+
     }
 
     @Override
@@ -36,6 +57,8 @@ public class EditReplyActivity extends BaseActivity {
         mySideTitle = getIntent().getStringExtra("sideTitle");
 
         binding.sideTitleTxt.setText(mySideTitle);
+
+        topicId = getIntent().getIntExtra("topicId", -1);
 
     }
 }

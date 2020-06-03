@@ -61,6 +61,7 @@ public class ViewTopicActivity extends BaseActivity {
                     Intent myIntent = new Intent(mContext, EditReplyActivity.class);
                     myIntent.putExtra("topicTitle", mTopic.getTitle());
                     myIntent.putExtra("sideTitle", mySideTitle);
+                    myIntent.putExtra("topicId", mTopic.getId());
                     startActivity(myIntent);
                 }
 
