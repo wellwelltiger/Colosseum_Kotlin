@@ -22,6 +22,7 @@ public class ViewTopicActivity extends BaseActivity {
 
     ActivityViewTopicBinding binding;
 
+    int topicId;
     Topic mTopic;
     TopicReplyAdapter mTopicReplyAdapter;
 
@@ -44,6 +45,34 @@ public class ViewTopicActivity extends BaseActivity {
                     @Override
                     public void onResponse(JSONObject json) {
                         Log.d("투표응답", json.toString());
+
+                        try {
+                            int code = json.getInt("code");
+
+                            if (code == 200) {
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        Toast.makeText(mContext, "참여해 주셔서 감사합니다.", Toast.LENGTH_SHORT).show();
+                                        getTopicFromServer();
+                                    }
+                                });
+                            }
+                            else {
+                                final String message = json.getString("message");
+
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        Toast.makeText(mContext, message, Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
                     }
                 });
 
@@ -57,6 +86,33 @@ public class ViewTopicActivity extends BaseActivity {
                     @Override
                     public void onResponse(JSONObject json) {
                         Log.d("투표응답", json.toString());
+
+                        try {
+                            int code = json.getInt("code");
+
+                            if (code == 200) {
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        Toast.makeText(mContext, "참여해 주셔서 감사합니다.", Toast.LENGTH_SHORT).show();
+                                        getTopicFromServer();
+                                    }
+                                });
+                            }
+                            else {
+                                final String message = json.getString("message");
+
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        Toast.makeText(mContext, message, Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
                     }
                 });
             }
@@ -67,13 +123,18 @@ public class ViewTopicActivity extends BaseActivity {
     @Override
     public void setValues() {
 
-        int topicId = getIntent().getIntExtra("topic_id", -1);
+        topicId = getIntent().getIntExtra("topic_id", -1);
 
         if (topicId == -1) {
             Toast.makeText(mContext, "잘못된 접근입니다.", Toast.LENGTH_SHORT).show();
             finish();
         }
 
+        getTopicFromServer();
+
+    }
+
+    void getTopicFromServer() {
         ServerUtil.getRequestTopicById(mContext, topicId, new ServerUtil.JsonResponseHandler() {
             @Override
             public void onResponse(JSONObject json) {
@@ -98,7 +159,6 @@ public class ViewTopicActivity extends BaseActivity {
 
             }
         });
-
     }
 
     void setTopicValuesToUi() {
