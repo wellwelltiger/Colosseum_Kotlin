@@ -11,6 +11,8 @@ public class ViewReplyActivity extends BaseActivity {
 
     ActivityViewReplyBinding binding;
 
+    int replyId = -1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,5 +29,17 @@ public class ViewReplyActivity extends BaseActivity {
     @Override
     public void setValues() {
 
+        replyId = getIntent().getIntExtra("replyId", -1);
+
+        if (replyId != -1) {
+//            서버에서 의견의 상세 정보를 불러오자.
+            getReplyDataFromServer();
+        }
+
     }
+
+    void getReplyDataFromServer() {
+
+    }
+
 }
