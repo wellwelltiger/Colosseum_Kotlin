@@ -2,6 +2,8 @@ package kr.co.tjoeun.colosseum_kotlin.adapters;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -122,7 +124,21 @@ public class TopicReplyAdapter extends ArrayAdapter<TopicReply> {
                         Log.d("좋아요누름", json.toString());
 
                         try {
-                            String message = json.getString("message");
+
+                            JSONObject dataObj = json.getJSONObject("data");
+                            JSONObject reply = dataObj.getJSONObject("reply");
+
+                            data.setLikeCount(reply.getInt("like_count"));
+                            data.setMyLike(reply.getBoolean("my_like"));
+                            data.setDislikeCount(reply.getInt("dislike_count"));
+                            data.setMyDislike(reply.getBoolean("my_dislike"));
+
+                            new Handler(Looper.getMainLooper()).post(new Runnable() {
+                                @Override
+                                public void run() {
+                                    notifyDataSetChanged();
+                                }
+                            });
 
 
                         } catch (JSONException e) {
@@ -142,6 +158,27 @@ public class TopicReplyAdapter extends ArrayAdapter<TopicReply> {
                     public void onResponse(JSONObject json) {
                         Log.d("싫어요누름", json.toString());
 
+                        try {
+
+                            JSONObject dataObj = json.getJSONObject("data");
+                            JSONObject reply = dataObj.getJSONObject("reply");
+
+                            data.setLikeCount(reply.getInt("like_count"));
+                            data.setMyLike(reply.getBoolean("my_like"));
+                            data.setDislikeCount(reply.getInt("dislike_count"));
+                            data.setMyDislike(reply.getBoolean("my_dislike"));
+
+                            new Handler(Looper.getMainLooper()).post(new Runnable() {
+                                @Override
+                                public void run() {
+                                    notifyDataSetChanged();
+                                }
+                            });
+
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
                     }
                 });
 
