@@ -4,11 +4,26 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-public class NotificationListActivity extends AppCompatActivity {
+public class NotificationListActivity extends BaseActivity {
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notification_list);
+        setupEvents();
+        setValues();
     }
+
+    @Override
+    public void setupEvents() {
+
+    }
+
+    @Override
+    public void setValues() {
+
+    }
+
+
 }
