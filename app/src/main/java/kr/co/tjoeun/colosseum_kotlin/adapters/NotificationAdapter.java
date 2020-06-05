@@ -47,8 +47,14 @@ public class NotificationAdapter extends ArrayAdapter<Notification> {
         View row = convertView;
 
         if (row == null) {
-            row = inf.inflate(R.layout.topic_reply_list_item, null);
+            row = inf.inflate(R.layout.notification_list_item, null);
         }
+
+        TextView notiTitleTxt = row.findViewById(R.id.notiTitleTxt);
+
+        Notification data = mList.get(position);
+
+        notiTitleTxt.setText(data.getTitle());
 
 
         return row;
