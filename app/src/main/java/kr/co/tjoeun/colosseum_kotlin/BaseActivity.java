@@ -1,7 +1,10 @@
 package kr.co.tjoeun.colosseum_kotlin;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -18,6 +21,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     public abstract void setValues();
 
     public TextView activityTxtTitle;
+    public ImageView notificationImg;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -40,10 +44,21 @@ public abstract class BaseActivity extends AppCompatActivity {
             getSupportActionBar().setCustomView(R.layout.custom_action_bar);
             getSupportActionBar().setBackgroundDrawable(null);
 
+
             Toolbar toolbar = (Toolbar) getSupportActionBar().getCustomView().getParent();
             toolbar.setContentInsetsAbsolute(0, 0);
 
-            activityTxtTitle = getSupportActionBar().getCustomView().findViewById(R.id.activityTitleTxt);
+            View customActionView = getSupportActionBar().getCustomView();
+            activityTxtTitle = customActionView.findViewById(R.id.activityTitleTxt);
+            notificationImg = customActionView.findViewById(R.id.notificationImg);
+
+            notificationImg.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent myIntent = new Intent(mContext,NotificationListActivity.class);
+                    startActivity(myIntent);
+                }
+            });
         }
 
     }
