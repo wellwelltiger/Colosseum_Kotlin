@@ -22,6 +22,7 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     public TextView activityTxtTitle;
     public ImageView notificationImg;
+    public  ImageView logoImg;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -32,6 +33,10 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     public void setTitle(CharSequence title) {
         super.setTitle(title);
+
+        activityTxtTitle.setVisibility(View.VISIBLE);
+        logoImg.setVisibility(View.GONE);
+
 
         activityTxtTitle.setText(title);
 
@@ -51,6 +56,7 @@ public abstract class BaseActivity extends AppCompatActivity {
             View customActionView = getSupportActionBar().getCustomView();
             activityTxtTitle = customActionView.findViewById(R.id.activityTitleTxt);
             notificationImg = customActionView.findViewById(R.id.notificationImg);
+            logoImg = customActionView.findViewById(R.id.logoImg);
 
             notificationImg.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -60,7 +66,7 @@ public abstract class BaseActivity extends AppCompatActivity {
                 }
             });
 
-            setTitle("Colosseum");
+//            setTitle("Colosseum");
         }
 
     }

@@ -27,6 +27,7 @@
             android:textSize="10sp" />
 
         <ImageView
+            android:id="@+id/logoImg"
             android:layout_width="100dp"
             android:layout_height="40dp"
             android:src="@drawable/nepp_logo"/>
